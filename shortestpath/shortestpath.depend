@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1550153551 source:d:\huhudoc\ctestprogram\shortestpath\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<math.h>
+
+1550243111 source:c:\users\12753\desktop\programming project\2\shortestpath\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<math.h>
+
