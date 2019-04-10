@@ -1,0 +1,29 @@
+# depslib dependency file v1.0
+1550333758 source:d:\huhudoc\ctestprogram\shortestpath\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<math.h>
+
+1550674920 source:d:\huhudoc\c-program\shortestpath\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<math.h>
+
+1550716242 source:d:\huhudoc\c-program\shortestpath2\functions.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<math.h>
+	"ShortestPath.h"
+
+1550716112 d:\huhudoc\c-program\shortestpath2\shortestpath.h
+
+1550716250 source:d:\huhudoc\c-program\shortestpath2\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<math.h>
+	"ShortestPath.h"
+
