@@ -1,4 +1,9 @@
-
+/*----------------------------------------------------------------*/
+/*  Program Name: main.c                                          */
+/*  Author: Jason Zhang                                           */
+/*  Last changes: 2019.4.1                                        */
+/*  Version: 2.1                                                  */
+/*----------------------------------------------------------------*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -7,18 +12,39 @@
 #include "function.h"
 #include "ini.h"
 #include "output.h"
- int main()
+
+int main()
 {
     int inputnode1,inputnode2;
-
     printf("\nWelcome to use my program!\n");
+    while(1)
+   {
+
     initial();
-    printf("The map has been initial.\n");
-//  check two node is alone
-    read();
-    write();
-    printf("\n We will calculate shortestpath, wait for 70 seconds...\n\n");
-    //shortestpathbyfloyd(1);   //calculate node shortest path
+    printf("The map data has been initial.\n");
+    readmapfile();
+    writemapfile();
+
+
+
+        printf("\nPlease input two node IDs (comma-delimited,input 0 then exit. ex:12345,67890):");
+        scanf("%d,%d",&inputnode1,&inputnode2);
+        if ((inputnode1==0)||(inputnode2==0))
+        {
+            printf("\nGoodbye!\n"); exit(0);
+        }
+        if ((getnewnodeid(inputnode1)<0) || (getnewnodeid(inputnode2)<0))
+        {
+            printf("Sorry.There is a error in input node id,try again!\n");
+            continue;
+        }
+
+        dijkstra(inputnode1);   //calculate node shortest path
+
+        if (writePath(inputnode1,inputnode2)==1)
+            printMap();
+    }
+}
 
 //test modular
 /*
@@ -28,15 +54,7 @@ printf("node 354734667(%d) to node 1601125136(%d) distance=%10.6lf \n",getnewnod
 printf("node 1601125136(%d) to node 21545939(%d) distance=%10.6lf \n",getnewnodeid(1601125136),getnewnodeid(21545939),distancenode[getnewnodeid(1601125136)][getnewnodeid(21545939)]);
 printf("node 1601125136(%d) to node 354734667(%d) distance=%10.6lf \n",getnewnodeid(1601125136),getnewnodeid(354734667),distancenode[getnewnodeid(1601125136)][getnewnodeid(354734667)]);
 */
-while(1)
-{
-    printf("\nPlease input two node IDs (comma-delimited):");
-    scanf("%d,%d",&inputnode1,&inputnode2);
-    dijkstra(inputnode1);   //calculate node shortest path
-    writePath(inputnode1,inputnode2);
-    printMap();
-    }
-}
-/*--------------------------------------------------------------------------------------------------------------------*/
-/* reference documentation  https://blog.csdn.net/jeffleo/article/details/53349825
-/*_____________________________________________________________________________________________________________________*/
+
+/*------------------------------------------------------------------------------------*/
+/* reference documentation  https://blog.csdn.net/jeffleo/article/details/53349825 */
+

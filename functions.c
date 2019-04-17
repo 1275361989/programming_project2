@@ -137,17 +137,20 @@ double trunc2float(char total[], char left[], char right[])
     t[k] = '\0';
     return round6(atof(t));
 }
-//calculate shortest path by floyd
+//calculate shortest path by dijkstra
 //imes: show process message
+
 void dijkstra(long src)
 {                       //v为点数
     //graph 为path[][]  src为inputnode1
-     //double V=4000;
+    //double V=4000;
     // int dist[V];     // The output array.  dist[i] will hold the shortest
                       // distance from src to i(dist[V]=path[src][V].distance)
      src=getnewnodeid(src);
      int sptSet[NODENUM]; // sptSet[i] will be true if vertex i is included in shortest
-     int road[NODENUM];
+     long road[NODENUM];
+
+
      for(int j=0;j<NODENUM;j++)
      {
           if(path[src][j].distance<MAXLENGTH)
@@ -157,7 +160,7 @@ void dijkstra(long src)
      }
 
 
-                // path tree or shortest distance from src to i is finalized(已知)
+// path tree or shortest distance from src to i is finalized(已知)
 //V=NODENUM
      // Initialize all distances as INFINITE and stpSet[] as false
      for (int i = 0; i < NODENUM; i++)
@@ -197,6 +200,7 @@ void dijkstra(long src)
      // print the constructed distance array
            // printSolution(dist, V);
 }
+
 // A utility function to find the vertex with minimum distance value, from
 // the set of vertices not yet included in shortest path tree
 int minDistance(long src,int sptSet[])

@@ -4,7 +4,70 @@
 #include <math.h>
 #include "shortestpath.h"
 #include "function.h"
-void writePath(int inputnode1,int inputnode2){
+
+int writePath(int inputnode1,int inputnode2)
+{
+    FILE *fpw;
+    int v,w,k;
+
+    int trace[NODENUM];
+    int j,count;
+
+    for(j=0;j<NODENUM;j++)
+    {
+        trace[j]=0;
+    }
+
+    v=getnewnodeid(inputnode1);
+    w=getnewnodeid(inputnode2);
+//27081332-> 354734667 1601125136
+    if ((fpw=fopen(OUTFILE3,"w+"))==NULL)
+    {
+        printf(" OutData file3 cannot be opened,please check the file!\n");
+        exit(0);
+    }
+    //has shortest path
+    if (path[v][w].distance<(MAXLENGTH-1))
+    {
+        count=0;
+        trace[count++]=w;
+        k=path[v][w].route;
+        while(k!=v)   //prevent the circle
+        {
+            trace[count++]=k;
+            k = path[v][k].route;
+        }
+        trace[count]=v;
+
+        printf("The shortest path of %d(%d)->%d(%d) is %10.6lf \n", inputnode1,v,inputnode2,w,path[v][w].distance);//v,w may need delete
+        printf("path: %d",inputnode1);//print the start
+
+        for(j=(count-1);j>0;j--)
+        {
+            k=trace[j];
+            printf("-> %ld",node[k].oldID);//print the node though in the screen
+            fprintf(fpw,"%10.6lf   %10.6lf\n",node[v].x,node[v].y);//print the node though to the file
+            fprintf(fpw,"%10.6lf   %10.6lf\n\n\n",node[k].x,node[k].y);
+            v=k;
+        }
+        printf("-> %d\n",inputnode2);//print the final node
+        fprintf(fpw,"%10.6lf   %10.6lf\n",node[v].x,node[v].y);
+        fprintf(fpw,"%10.6lf   %10.6lf\n\n\n",node[w].x,node[w].y);
+
+        return 1;
+    }
+    else
+    {
+        printf("\n %d -> %d shortest path is NULL\n", inputnode1,inputnode2);
+        printf("sorry! There is no path between these two nodes!\n");
+
+        return 0;
+    }
+    fclose(fpw);
+}
+
+void writePath2(int inputnode1,int inputnode2)
+{
     FILE *fpw;
     int v,w,k;
     if ((getnewnodeid(inputnode1)<0) || (getnewnodeid(inputnode2)<0))
@@ -54,7 +117,9 @@ void writePath(int inputnode1,int inputnode2){
     }
     fclose(fpw);
 }
-void printMap(){
+
+void printMap()
+{
     FILE *fpw;
     if ((fpw=fopen(PLOTSCRIPTFILE,"w+"))==NULL)
     {

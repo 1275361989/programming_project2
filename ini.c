@@ -1,3 +1,9 @@
+/*----------------------------------------------------------------*/
+/*  Program Name: ini.c                                           */
+/*  Author: Jason Zhang                                           */
+/*  Last changes: 2019.4.1                                        */
+/*  Version: 2.1                                                  */
+/*----------------------------------------------------------------*/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -5,10 +11,13 @@
 #include <math.h>
 #include "shortestpath.h"
 #include "function.h"
+
 int maxnodenum=0,maxlinknum=0;
 int node1id,node2id,pathid;
 double dis;
-void initial(){
+
+void initial()
+{
     int i=0,j=0;
     //initial the array and various
     for (i=0;i<NODENUM;i++)
@@ -35,7 +44,9 @@ void initial(){
         link[i].to=0;
     }
 }
-void read(){
+
+void readmapfile()
+{
     FILE *fp;
     int i;
     char tempstr[DATALEN];
@@ -44,7 +55,7 @@ void read(){
         printf("Map Data file a cannot be opened,please check the file!\n");
         exit(0);
     }
-    printf("\n  Map is been parsing ,wait...\n");
+//    printf("\n  Map is been parsing ,wait...\n");
 
     //search the <node>,create the table of old and new nodes, and fprintf them for gnuplot
     i=0;
@@ -86,7 +97,9 @@ void read(){
     fclose(fp); //close map file point
 
 }
-void write(){
+
+void writemapfile()
+{
     int i;
     FILE *fpw;
     char tempstr1[80],tempstr2[80];
