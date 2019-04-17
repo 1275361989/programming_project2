@@ -1,0 +1,42 @@
+# depslib dependency file v1.0
+1555471892 source:c:\users\12753\desktop\programming project\2\shortestpathbydij\functions.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<math.h>
+	"ShortestPath.h"
+
+1553352961 c:\users\12753\desktop\programming project\2\shortestpathbydij\shortestpath.h
+
+1555472613 source:c:\users\12753\desktop\programming project\2\shortestpathbydij\ini.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<math.h>
+	"shortestpath.h"
+	"function.h"
+
+1552977106 c:\users\12753\desktop\programming project\2\shortestpathbydij\function.h
+
+1555472938 source:c:\users\12753\desktop\programming project\2\shortestpathbydij\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<math.h>
+	"shortestpath.h"
+	"function.h"
+	"ini.h"
+	"output.h"
+
+1553396929 c:\users\12753\desktop\programming project\2\shortestpathbydij\ini.h
+
+1555340293 c:\users\12753\desktop\programming project\2\shortestpathbydij\output.h
+
+1555472607 source:c:\users\12753\desktop\programming project\2\shortestpathbydij\output.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<math.h>
+	"shortestpath.h"
+	"function.h"
+

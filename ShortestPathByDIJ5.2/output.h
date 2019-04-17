@@ -1,0 +1,2 @@
+void printMap();
+int writePath();
