@@ -24,7 +24,7 @@ int writePath(int inputnode1,int inputnode2)
     if ((fpw=fopen(OUTFILE3,"w+"))==NULL)
     {
         printf(" OutData file3 cannot be opened,please check the file!\n");
-        exit(0);
+        exit(-4);
     }
     //has shortest path
     if (path[v][w].distance<(MAXLENGTH-1))
@@ -46,6 +46,7 @@ int writePath(int inputnode1,int inputnode2)
         {
             k=trace[j];
             printf("-> %ld",node[k].oldID);//print the node though in the screen
+
             fprintf(fpw,"%10.6lf   %10.6lf\n",node[v].x,node[v].y);//print the node though to the file
             fprintf(fpw,"%10.6lf   %10.6lf\n\n\n",node[k].x,node[k].y);
             v=k;
@@ -53,6 +54,7 @@ int writePath(int inputnode1,int inputnode2)
         printf("-> %d\n",inputnode2);//print the final node
         fprintf(fpw,"%10.6lf   %10.6lf\n",node[v].x,node[v].y);
         fprintf(fpw,"%10.6lf   %10.6lf\n\n\n",node[w].x,node[w].y);
+        fclose(fpw);
 
         return 1;
     }
@@ -63,59 +65,6 @@ int writePath(int inputnode1,int inputnode2)
 
         return 0;
     }
-    fclose(fpw);
-}
-
-void writePath2(int inputnode1,int inputnode2)
-{
-    FILE *fpw;
-    int v,w,k;
-    if ((getnewnodeid(inputnode1)<0) || (getnewnodeid(inputnode2)<0))
-    {
-        printf(" Sorry.There is a error in input node id!\n");
-        exit(0);
-    }
-    if ((isalonenode(getnewnodeid(inputnode1))==1)||(isalonenode(getnewnodeid(inputnode2))==1))
-    {
-        printf(" Sorry! There is no path between these two nodes!\n");
-        exit(0);
-    }
-
-
-    v=getnewnodeid(inputnode1);
-    w=getnewnodeid(inputnode2);
-//27081332-> 354734667 1601125136
-    if ((fpw=fopen(OUTFILE3,"w+"))==NULL)
-    {
-        printf(" OutData file3 cannot be opened,please check the file!\n");
-        exit(0);
-    }
-    //has shortest path
-    if (path[v][w].distance<(MAXLENGTH-1))
-    {
-        k=path[v][w].route;
-        printf("The shortest path of %d(%d)->%d(%d) is %10.6lf \n", inputnode1,v,inputnode2,w,path[v][w].distance);//v,w may need delete
-        printf("path: %d",inputnode1);//print the start
-        while(k!=v)   //prevent the circle
-        {
-            printf("-> %ld",node[k].oldID);//print the node though in the screen
-
-            fprintf(fpw,"%10.6lf   %10.6lf\n",node[w].x,node[w].y);//print the node though to the file
-            fprintf(fpw,"%10.6lf   %10.6lf\n\n\n",node[k].x,node[k].y);
-
-            w=k;
-            k = path[v][k].route;
-        }
-        printf("-> %d\n",inputnode2);//print the final node
-        fprintf(fpw,"%10.6lf   %10.6lf\n",node[v].x,node[v].y);
-        fprintf(fpw,"%10.6lf   %10.6lf\n\n\n",node[k].x,node[k].y);
-    }
-    else
-    {
-        printf("\n %d -> %d shortest path is NULL\n", inputnode1,inputnode2);
-        printf("sorry! There is no path between these two nodes!\n");
-    }
-    fclose(fpw);
 }
 
 void printMap()
@@ -124,7 +73,7 @@ void printMap()
     if ((fpw=fopen(PLOTSCRIPTFILE,"w+"))==NULL)
     {
         printf(" Plot script file3 cannot be created,please check the file!\n");
-        exit(0);
+        exit(-5);
     }
     //look for Final_Map.map
     //<bounding  minLat=53.801600 minLon=-1.564000 maxLat=53.811000 maxLon=-1.543100 /bounding>

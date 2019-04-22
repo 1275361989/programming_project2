@@ -53,7 +53,7 @@ void readmapfile()
     if ((fp=fopen(MAPDATAFILE,"r"))==NULL)
     {
         printf("Map Data file a cannot be opened,please check the file!\n");
-        exit(0);
+        exit(-1);
     }
 //    printf("\n  Map is been parsing ,wait...\n");
 
@@ -106,7 +106,7 @@ void writemapfile()
     if ((fpw=fopen(OUTFILE1,"w+"))==NULL)
     {
         printf(" OutData file1 cannot be opened,please check the file!\n");
-        exit(0);
+        exit(-2);
     }
     for (i=0;i<maxnodenum;i++)
     {
@@ -121,7 +121,7 @@ void writemapfile()
     if ((fpw=fopen(OUTFILE2,"w+"))==NULL)
     {
         printf(" OutData file2 cannot be opened,please check the file!\n");
-        exit(0);
+        exit(-3);
     }
     for (i=0;i<maxlinknum;i++)
     {

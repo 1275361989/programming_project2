@@ -16,23 +16,25 @@
 int main()
 {
     int inputnode1,inputnode2;
+
     printf("\nWelcome to use my program!\n");
+//    initial();
+//    printf("The map data has been initial.\n");
+//    readmapfile();
+//    writemapfile();
+
     while(1)
-   {
-
-    initial();
-    printf("The map data has been initial.\n");
-    readmapfile();
-    writemapfile();
-
-
-
-        printf("\nPlease input two node IDs (comma-delimited,input 0 then exit. ex:12345,67890):");
+    {
+        printf("\nPlease input two Node IDs (comma-delimited,input 0 then exit. ex:12345,67890):");
         scanf("%d,%d",&inputnode1,&inputnode2);
         if ((inputnode1==0)||(inputnode2==0))
         {
             printf("\nGoodbye!\n"); exit(0);
         }
+
+        printf("The map data has been initial.\n");
+        initial();
+        readmapfile();
         if ((getnewnodeid(inputnode1)<0) || (getnewnodeid(inputnode2)<0))
         {
             printf("Sorry.There is a error in input node id,try again!\n");
@@ -42,7 +44,11 @@ int main()
         dijkstra(inputnode1);   //calculate node shortest path
 
         if (writePath(inputnode1,inputnode2)==1)
+        {
+            writemapfile();
             printMap();
+        }
+
     }
 }
 

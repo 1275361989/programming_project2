@@ -141,15 +141,12 @@ double trunc2float(char total[], char left[], char right[])
 //imes: show process message
 
 void dijkstra(long src)
-{                       //v为点数
-    //graph 为path[][]  src为inputnode1
-    //double V=4000;
-    // int dist[V];     // The output array.  dist[i] will hold the shortest
-                      // distance from src to i(dist[V]=path[src][V].distance)
-     src=getnewnodeid(src);
+{
+
      int sptSet[NODENUM]; // sptSet[i] will be true if vertex i is included in shortest
      long road[NODENUM];
 
+     src=getnewnodeid(src);
 
      for(int j=0;j<NODENUM;j++)
      {
