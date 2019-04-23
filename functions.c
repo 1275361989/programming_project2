@@ -21,9 +21,9 @@ double round6(double d)
        return d1;
 }
 
-//find sub string
-//input: string,sub string
-//output: the first index of sub string
+//find substring
+//input: str1:string,str2:substring
+//output: the first index of substring
 int findstring(char* str1,char* str2)
 {
     int i,j,flag=-1;
@@ -33,13 +33,13 @@ int findstring(char* str1,char* str2)
         {
             i++;
             j++;
-            if(str2[j]==NULL)
+            if(str2[j]==NULL)//if the function read the end of the str2
             {
-                flag=i-j;
+                flag=i-j;//record the str2's first index in str1
                 return flag;
             }
         }
-        j=0;
+       // j=0;
     }
     return flag;
 }
@@ -52,7 +52,7 @@ int findstring2(char* str1,char* str2)
     int i,j;
 
     i=findstring(str1,str2);   //first
-    j=findstring(str1+i+strlen(str2),str2);   //secord
+    j=findstring(str1+i+strlen(str2),str2);   //find the second string after the first by skipping the proper length
 
     return i+strlen(str2)+j;//there are two same string in tag <link>, the function will return the second one
 }
@@ -65,7 +65,7 @@ long trunc2int(char total[], char left[], char right[])
     int i=0,j=0,k=0;
     char t[256];
 
-    for ( i=findstring(total,left)+strlen(left),j=findstring(total,right); i<j; i++)
+    for ( i=findstring(total,left)+strlen(left),j=findstring(total,right); i<j; i++)//i is the start of the string we need, and j is the end
     {
         t[k] = total[i];
         k++;
