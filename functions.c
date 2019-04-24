@@ -144,16 +144,16 @@ void dijkstra(long src)
 {
 
      int sptSet[NODENUM]; // sptSet[i] will be true if vertex i is included in shortest
-     long road[NODENUM];
+    // long road[NODENUM];
 
      src=getnewnodeid(src);
 
      for(int j=0;j<NODENUM;j++)
      {
           if(path[src][j].distance<MAXLENGTH)
-            road[j]=src;
+            path[src][j].route=src;
           else
-            road[j]=-1;
+            path[src][j].route=-1;
      }
 
 
@@ -183,7 +183,7 @@ void dijkstra(long src)
             if (!sptSet[v] && path[u][v].distance && path[src][u].distance != MAXLENGTH&& path[src][u].distance + path[u][v].distance < path[src][v].distance)
             {
                 path[src][v].distance= path[src][u].distance+ path[u][v].distance;
-                road[v]=u;
+                path[src][v].route=u;
             }
         }
 
@@ -192,8 +192,8 @@ void dijkstra(long src)
          // u to v, and total weight of path from src to  v through u is
          // smaller than current value of dist[v]
      }
-     for(int k=0;k<NODENUM;k++)
-        path[src][k].route=road[k];
+     //for(int k=0;k<NODENUM;k++)
+       // path[src][k].route=road[k];
      // print the constructed distance array
            // printSolution(dist, V);
 }
