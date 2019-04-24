@@ -15,38 +15,40 @@
 
 int main()
 {
-    int inputnode1,inputnode2;
+    int inputnode1,inputnode2;//the two input node's id
 
-    printf("\nWelcome to use my program!\n");
-//    initial();
-//    printf("The map data has been initial.\n");
-//    readmapfile();
-//    writemapfile();
+    printf("\nWelcome to use system!\n");
 
     while(1)
     {
-        printf("\nPlease input two Node IDs (comma-delimited,input 0 then exit. ex:12345,67890):");
+        printf("\nPlease input two Node IDs (comma-delimited,input 0 to exit:");
         scanf("%d,%d",&inputnode1,&inputnode2);
-        if ((inputnode1==0)||(inputnode2==0))
+        if ((inputnode1==0)||(inputnode2==0))//if the input node is 0 ,exit the system
         {
-            printf("\nGoodbye!\n"); exit(0);
+            printf("\nnice to see you again !\n");
+            exit(0);
         }
 
+        initial();//initial the whole program
+        readmapfile();//read information from map file
         printf("The map data has been initial.\n");
-        initial();
-        readmapfile();
-        if ((getnewnodeid(inputnode1)<0) || (getnewnodeid(inputnode2)<0))
+        if ((getnewnodeid(inputnode1)<0) || (getnewnodeid(inputnode2)<0))//if the input id is error, give the warning
         {
-            printf("Sorry.There is a error in input node id,try again!\n");
+            printf("Sorry.There is a error in input node id,please try again!\n");
+            continue;
+        }
+        if ((isalonenode(getnewnodeid(inputnode1))==1)||(isalonenode(getnewnodeid(inputnode2))==1))
+        {
+            printf(" Sorry! There is no path between these two nodes!please try again \n");
             continue;
         }
 
         dijkstra(inputnode1);   //calculate node shortest path
 
-        if (writePath(inputnode1,inputnode2)==1)
+        if (writePath(inputnode1,inputnode2)==1)//if the two nodes have the link,write the path
         {
-            writemapfile();
-            printMap();
+            writemapfile();//write the link and node
+            printMap();//start the gnuplot
         }
 
     }

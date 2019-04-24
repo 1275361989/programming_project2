@@ -30,7 +30,7 @@ void initial()
             if (i==j)
                 path[i][j].distance=0.0;    //  A to A is 0
             else
-                path[i][j].distance=MAXLENGTH;   //assign max value
+                path[i][j].distance=MAXLENGTH;   //assign max value to all path
         }
         for (j=0;j<NODENUM;j++)
             path[i][j].route=j;  // from i to j through j
@@ -50,7 +50,7 @@ void readmapfile()
     FILE *fp;
     int i;
     char tempstr[DATALEN];
-    if ((fp=fopen(MAPDATAFILE,"r"))==NULL)
+    if ((fp=fopen(MAPDATAFILE,"r"))==NULL)//if the file is error, it will give the warnings
     {
         printf("Map Data file a cannot be opened,please check the file!\n");
         exit(-1);
@@ -63,8 +63,8 @@ void readmapfile()
     {
         if (strstr(tempstr,"<node")!=NULL)
         {
-             node[i].oldID=trunc2int(tempstr,"<node id=","lat=");
-             node[i].y=trunc2float(tempstr,"lat=","lon=");
+             node[i].oldID=trunc2int(tempstr,"<node id=","lat=");//get the id of each node
+             node[i].y=trunc2float(tempstr,"lat=","lon=");//get the x and y of each node
              node[i].x=trunc2float(tempstr,"lon=","/node>");
 //printf("newnodeid=%d,oldnodeid=%d, coordinates X=%lf Y=%lf \n",i,nodetable[i],nodeX[i],nodeY[i]);
              i++;
@@ -75,13 +75,13 @@ void readmapfile()
     i=0;
     while(fgets(tempstr,DATALEN-1,fp))
     {
-        if (strstr(tempstr,"<link")!=NULL)
+        if (strstr(tempstr,"<link")!=NULL)//find the tag <link>
         {
-             pathid=trunc2int(tempstr,"<link id=","node=");
-             node1id=trunc2int2(tempstr,"node=","node=");
-             node2id=trunc2int3(tempstr,"node=","way=");
-             dis=trunc2float(tempstr,"length=","veg=");
-             link[i].oldID=pathid;
+             pathid=trunc2int(tempstr,"<link id=","node=");//get the id for each path
+             node1id=trunc2int2(tempstr,"node=","node=");//get the node1 id in the path
+             node2id=trunc2int3(tempstr,"node=","way=");//get the node2 id in the path
+             dis=trunc2float(tempstr,"length=","veg=");//get the distance of the path
+             link[i].oldID=pathid;                     //assign the value to array
              link[i].from=getnewnodeid(node1id);
              link[i].to=getnewnodeid(node2id);
              path[getnewnodeid(node1id)][getnewnodeid(node2id)].distance=dis;     //distance of a to b =  distance of b to a
@@ -93,7 +93,7 @@ void readmapfile()
 
         }
     }
-    maxlinknum=i;
+    maxlinknum=i;//calculate the amount of link
     fclose(fp); //close map file point
 
 }
@@ -102,15 +102,15 @@ void writemapfile()
 {
     int i;
     FILE *fpw;
-    char tempstr1[80],tempstr2[80];
-    if ((fpw=fopen(OUTFILE1,"w+"))==NULL)
+    char tempstr1[80],tempstr2[80];//the temp array
+    if ((fpw=fopen(OUTFILE1,"w+"))==NULL)//if the file is error, it will give the warnings
     {
         printf(" OutData file1 cannot be opened,please check the file!\n");
         exit(-2);
     }
     for (i=0;i<maxnodenum;i++)
     {
-        gcvt(node[i].x,7,tempstr1);
+        gcvt(node[i].x,7,tempstr1);//formatted output of the node
         gcvt(node[i].y,8,tempstr2);
         strcat(tempstr1,"   ");
         strcat(tempstr1,tempstr2);
@@ -118,26 +118,26 @@ void writemapfile()
     }
     fclose(fpw);//finish the print of map
 
-    if ((fpw=fopen(OUTFILE2,"w+"))==NULL)
+    if ((fpw=fopen(OUTFILE2,"w+"))==NULL)//if the file is error, it will give the warnings
     {
         printf(" OutData file2 cannot be opened,please check the file!\n");
         exit(-3);
     }
     for (i=0;i<maxlinknum;i++)
     {
-        gcvt(node[link[i].from].x,7,tempstr1);
-        gcvt(node[link[i].from].y,8,tempstr2);
+        gcvt(node[link[i].from].x,7,tempstr1);//formatted output of the link
+        gcvt(node[link[i].from].y,8,tempstr2);//formatted output of the first node in the path
         strcat(tempstr1,"   ");
         strcat(tempstr1,tempstr2);
         fprintf(fpw,"%s\n",tempstr1);
 
-        gcvt(node[link[i].to].x,7,tempstr1);
+        gcvt(node[link[i].to].x,7,tempstr1);//formatted output of the second node in the path
         gcvt(node[link[i].to].y,8,tempstr2);
         strcat(tempstr1,"   ");
         strcat(tempstr1,tempstr2);
-        fprintf(fpw,"%s\n\n\n",tempstr1);
+        fprintf(fpw,"%s\n\n\n",tempstr1);//the format which the gnuplot needed
     }
-    fclose(fpw);
+    fclose(fpw);//finish the print to file
 
 }
 
